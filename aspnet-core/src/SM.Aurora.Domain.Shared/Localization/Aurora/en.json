@@ -1,8 +1,38 @@
 {
+  /**General**/
   "culture": "en",
   "texts": {
     "Menu:Home": "Home",
     "Welcome": "Welcome",
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
+    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
+    "Menu:BikeShop": "Bike Shop",
+    "Actions": "Actions",
+    "Close": "Close",
+    "Delete": "Delete",
+    "Edit": "Edit",
+    "CreationTime": "Creation time",
+    "AreYouSure": "Are you sure?",
+    "AreYouSureToDelete": "Are you sure you want to delete this item?",
+
+    /**Bike Localization**/
+    "Menu:Bikes": "Bikes",
+    "NewBike": "New bike",
+    "Brand": "Brand",
+    "Model": "Model",
+    "Type": "Type",
+    "Color": "Color",
+    "ReleaseYear": "Release Year",
+    "Price": "Price",
+    "Enum:BikeType.0": "Mountain Bike",
+    "Enum:BikeType.1": "Road Bike",
+    "Enum:BikeType.2": "Hybrid Bike",
+    "Enum:BikeType.3": "E-Bike",
+    "Permission:BikeShop": "Bike Shop",
+    "Permission:Bikes": "Bike Management",
+    "Permission:Bikes.Create": "Creating new bikes",
+    "Permission:Bikes.Edit": "Editing the bikes",
+    "Permission:Bikes.Delete": "Deleting the bikes"
+
+
   }
 }

@@ -8,9 +8,13 @@ public class AuroraPermissionDefinitionProvider : PermissionDefinitionProvider
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var myGroup = context.AddGroup(AuroraPermissions.GroupName);
-        //Define your own permissions here. Example:
-        //myGroup.AddPermission(AuroraPermissions.MyPermission1, L("Permission:MyPermission1"));
+        var bikeShopGroup = context.AddGroup(AuroraPermissions.GroupName, L("Permission:BikeShop"));
+
+        var bikesPermission = bikeShopGroup.AddPermission(AuroraPermissions.Bikes.Default, L("Permission:Bikes"));
+        bikesPermission.AddChild(AuroraPermissions.Bikes.Create, L("Permission:Bikes.Create"));
+        bikesPermission.AddChild(AuroraPermissions.Bikes.Edit, L("Permission:Bikes.Edit"));
+        bikesPermission.AddChild(AuroraPermissions.Bikes.Delete, L("Permission:Bikes.Delete"));
+
     }
 
     private static LocalizableString L(string name)

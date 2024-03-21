@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SM.Aurora.Bikes;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -24,6 +26,8 @@ public class AuroraDbContext :
     ITenantManagementDbContext
 {
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
+
+    public DbSet<Bike> Bikes { get; set; }
 
     #region Entities from the modules
 
@@ -75,6 +79,20 @@ public class AuroraDbContext :
         builder.ConfigureTenantManagement();
 
         /* Configure your own tables/entities inside here */
+
+        builder.Entity<Bike>(b =>
+        {
+            b.ToTable(AuroraConsts.DbTablePrefix + "Bikes",
+                AuroraConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Brand).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Model).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Type).IsRequired();
+            b.Property(x => x.Color).IsRequired().HasMaxLength(50);
+            b.Property(x => x.ReleaseYear).IsRequired();
+            b.Property(x => x.Price).IsRequired();
+        });
+
 
         //builder.Entity<YourEntity>(b =>
         //{
