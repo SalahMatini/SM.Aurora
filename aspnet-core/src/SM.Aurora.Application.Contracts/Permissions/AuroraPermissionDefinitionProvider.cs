@@ -15,6 +15,11 @@ public class AuroraPermissionDefinitionProvider : PermissionDefinitionProvider
         bikesPermission.AddChild(AuroraPermissions.Bikes.Edit, L("Permission:Bikes.Edit"));
         bikesPermission.AddChild(AuroraPermissions.Bikes.Delete, L("Permission:Bikes.Delete"));
 
+        var customersPermission = bikeShopGroup.AddPermission(AuroraPermissions.Customers.Default, L("Permission:Customers"));
+        customersPermission.AddChild(AuroraPermissions.Customers.Create, L("Permission:Customers.Create"));
+        customersPermission.AddChild(AuroraPermissions.Customers.Edit, L("Permission:Customers.Edit"));
+        customersPermission.AddChild(AuroraPermissions.Customers.Delete, L("Permission:Customers.Delete"));
+
     }
 
     private static LocalizableString L(string name)

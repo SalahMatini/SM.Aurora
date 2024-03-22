@@ -1,0 +1,130 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col col-md-6">
+                <h5 class="card-title">
+                    {{ '::Menu:Customers' | abpLocalization }}
+                </h5>
+            </div>
+            <div class="text-end col col-md-6">
+                <!-- Add the "new book" button here -->
+                <div class="text-lg-end pt-2">
+                    <button id="create" class="btn btn-primary" type="button" (click)="createCustomer()">
+                        <i class="fa fa-plus me-1"></i>
+                        <span>{{ "::NewCustomer" | abpLocalization }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <ngx-datatable [rows]="customer.items" [count]="customer.totalCount" [list]="list" default>
+
+            <ngx-datatable-column [name]="'::Actions' | abpLocalization" [maxWidth]="150" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div ngbDropdown container="body" class="d-inline-block">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" ngbDropdownToggle>
+                            <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
+                        </button>
+                        <div ngbDropdownMenu>
+                            <button ngbDropdownItem (click)="editCustomer(row.id)">
+                                {{ '::Edit' | abpLocalization }}
+                            </button>
+                            <button ngbDropdownItem (click)="delete(row.id)">
+                                {{ '::Delete' | abpLocalization }}
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column [name]="'::FullName' | abpLocalization" prop="fullName"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Age' | abpLocalization" prop="age"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Gender' | abpLocalization" prop="gender">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ '::Enum:Gender.' + row.gender | abpLocalization }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Country' | abpLocalization" prop="country">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ '::Enum:Country.' + row.country | abpLocalization }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column [name]="'::Email' | abpLocalization" prop="email"></ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>
+
+<!-- Add the modal here -->
+<abp-modal [(visible)]="isModalOpen">
+    <ng-template #abpHeader>
+        <h3>{{ (selectedCustomer.id ? '::Edit' : '::NewCustomer' ) | abpLocalization }}</h3>
+    </ng-template>
+
+    <ng-template #abpBody>
+        <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="mt-2">
+                <label for="customer-firstName">First Name</label><span> * </span>
+                <input type="text" id="customer-firstName" class="form-control" formControlName="firstName" autofocus />
+            </div>
+
+            <div class="mt-2">
+                <label for="customer-lastName">Last Name</label><span> * </span>
+                <input type="text" id="customer-lastName" class="form-control" formControlName="lastName" />
+            </div>
+
+            <div class="mt-2">
+                <label>Date of birth</label><span> * </span>
+                <input #datepicker="ngbDatepicker" class="form-control" name="datepicker" formControlName="dateOfBirth"
+                    ngbDatepicker (click)="datepicker.toggle()" />
+            </div>
+
+            <div class="mt-2">
+                <label for="customer-gender">Gender</label><span> * </span>
+                <select class="form-control" id="customer-gender" formControlName="gender">
+                    <option [ngValue]="null">Select customer's gender</option>
+                    <option [ngValue]="type.value" *ngFor="let type of genders"> {{ '::Enum:Gender.' + type.value |
+                        abpLocalization }}</option>
+                </select>
+            </div>
+
+            <div class="mt-2">
+                <label for="customer-email">Email</label><span> * </span>
+                <input type="text" id="customer-email" class="form-control" formControlName="email" />
+            </div>
+
+            <div class="mt-2">
+                <label for="customer-phoneNumber">Phone Number</label><span> * </span>
+                <input type="text" id="customer-phoneNumber" class="form-control" formControlName="phoneNumber" />
+            </div>
+
+            <div class="mt-2">
+                <label for="customer-country">Country</label><span> * </span>
+                <select class="form-control" id="customer-country" formControlName="country">
+                    <option [ngValue]="null">Select customer's country</option>
+                    <option [ngValue]="type.value" *ngFor="let type of countries"> {{ '::Enum:Country.' + type.value |
+                        abpLocalization }}</option>
+                </select>
+            </div>
+
+            <div class="mt-2">
+                <label for="customer-address">Address</label><span> * </span>
+                <input type="text" id="customer-address" class="form-control" formControlName="address" />
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template #abpFooter>
+        <button type="button" class="btn btn-secondary" abpClose>
+            {{ '::Close' | abpLocalization }}
+        </button>
+
+        <!--added save button-->
+        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
+            <i class="fa fa-check mr-1"></i>
+            {{ '::Save' | abpLocalization }}
+        </button>
+    </ng-template>
+</abp-modal>
+

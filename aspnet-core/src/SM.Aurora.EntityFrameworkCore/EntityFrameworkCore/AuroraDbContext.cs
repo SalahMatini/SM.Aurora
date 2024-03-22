@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SM.Aurora.Bikes;
+using SM.Aurora.Customers;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -28,6 +29,7 @@ public class AuroraDbContext :
     /* Add DbSet properties for your Aggregate Roots / Entities here. */
 
     public DbSet<Bike> Bikes { get; set; }
+    public DbSet<Customer> Customers { get; set; }
 
     #region Entities from the modules
 
@@ -93,6 +95,21 @@ public class AuroraDbContext :
             b.Property(x => x.Price).IsRequired();
         });
 
+        builder.Entity<Customer>(c =>
+        {
+            c.ToTable(AuroraConsts.DbTablePrefix + "Customers",
+                AuroraConsts.DbSchema);
+            c.ConfigureByConvention(); //auto configure for the base class props
+            c.Property(x => x.FirstName).IsRequired().HasMaxLength(50);
+            c.Property(x => x.LastName).IsRequired().HasMaxLength(50);
+            c.Property(x => x.DateOfBirth).IsRequired();
+            c.Property(x => x.Gender).IsRequired();
+            c.Property(x => x.Email).IsRequired().HasMaxLength(256);
+            c.Property(x => x.PhoneNumber).IsRequired().HasMaxLength(20);
+            c.Property(x => x.Country).IsRequired();
+            c.Property(x => x.Address).IsRequired().HasMaxLength(256);
+
+        });
 
         //builder.Entity<YourEntity>(b =>
         //{

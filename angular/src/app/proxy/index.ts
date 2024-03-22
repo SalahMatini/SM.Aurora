@@ -1,2 +1,4 @@
 import * as Bikes from './bikes';
-export { Bikes };
+import * as Customers from './customers';
+import * as Shared from './shared';
+export { Bikes, Customers, Shared };

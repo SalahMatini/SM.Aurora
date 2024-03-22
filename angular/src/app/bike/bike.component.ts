@@ -23,7 +23,7 @@ export class BikeComponent implements OnInit {
   constructor(
     public readonly list: ListService,
     private bikeService: BikeService,
-    private fb: FormBuilder, // inject FormBuilder
+    private fb: FormBuilder,
     private confirmation: ConfirmationService
   ) {}
 
