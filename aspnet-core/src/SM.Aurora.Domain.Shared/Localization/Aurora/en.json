@@ -51,7 +51,22 @@
     "Permission:Customers.Edit": "Editing the customers",
     "Permission:Customers.Delete": "Deleting the customers",
 
-
+    /**Orders Localization**/
+    "Menu:Orders": "Orders",
+    "NewOrder": "New Order",
+    "OrderId": "#OrderId",
+    "OrderDate": "Order Date",
+    "OrderStatus": "Order Status",
+    "ShippingAddress": "Shipping Address",
+    "Permission:Orders": "Orders Management",
+    "Permission:Orders.Create": "Creating new orders",
+    "Permission:Orders.Edit": "Editing the orders",
+    "Permission:Orders.Delete": "Deleting the orders",
+    "Enum:OrderStatus.0": "Pending",
+    "Enum:OrderStatus.1": "Processing",
+    "Enum:OrderStatus.2": "Shipped",
+    "Enum:OrderStatus.3": "Delivered",
+    "Enum:OrderStatus.4": "Cancelled",
 
 
 

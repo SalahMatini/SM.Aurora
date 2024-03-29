@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SM.Aurora.Bikes;
 using SM.Aurora.Customers;
+using SM.Aurora.Orders;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -30,6 +31,7 @@ public class AuroraDbContext :
 
     public DbSet<Bike> Bikes { get; set; }
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<Order> Orders { get; set; }
 
     #region Entities from the modules
 
@@ -111,11 +113,17 @@ public class AuroraDbContext :
 
         });
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(AuroraConsts.DbTablePrefix + "YourEntities", AuroraConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.Entity<Order>(o =>
+        {
+            o.ToTable(AuroraConsts.DbTablePrefix + "Orders",
+                AuroraConsts.DbSchema);
+            o.ConfigureByConvention(); //auto configure for the base class props
+
+            o.HasKey(x => x.OrderId);
+
+            o.Property(x => x.OrderDate).IsRequired();
+            o.Property(x => x.OrderStatus).IsRequired();
+            o.Property(x => x.ShippingAddress).IsRequired().HasMaxLength(256);
+        });
     }
 }

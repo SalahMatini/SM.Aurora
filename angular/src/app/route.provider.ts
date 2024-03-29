@@ -38,6 +38,14 @@ function configureRoutes(routesService: RoutesService) {
         layout: eLayoutType.application,
         requiredPolicy: 'BikeShop.Customers',
       },
+      {
+        path: '/orders',
+        name: '::Menu:Orders',
+        iconClass: 'fas fa-clipboard-check',
+        parentName: '::Menu:BikeShop',
+        layout: eLayoutType.application,
+        requiredPolicy: 'BikeShop.Orders',
+      },
     ]);
   };
 }
