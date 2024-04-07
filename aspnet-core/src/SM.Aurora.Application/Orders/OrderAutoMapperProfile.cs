@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using SM.Aurora.Orders;
+using SM.Aurora.Customers;
 
-namespace SM.Aurora.Customers
+namespace SM.Aurora.Orders
 {
     public class OrderAutoMapperProfile : Profile
     {
@@ -9,6 +9,7 @@ namespace SM.Aurora.Customers
         {
             CreateMap<Order, OrderDto>();
             CreateMap<CreateUpdateOrderDto, Order>();
+            CreateMap<Customer, CustomerLookupDto>();
         }
     }
 }

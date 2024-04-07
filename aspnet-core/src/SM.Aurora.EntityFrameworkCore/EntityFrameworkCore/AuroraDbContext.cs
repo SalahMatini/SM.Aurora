@@ -124,6 +124,8 @@ public class AuroraDbContext :
             o.Property(x => x.OrderDate).IsRequired();
             o.Property(x => x.OrderStatus).IsRequired();
             o.Property(x => x.ShippingAddress).IsRequired().HasMaxLength(256);
+
+            o.HasOne<Customer>(o => o.Customer).WithMany().HasForeignKey(x => x.CustomerId).IsRequired();
         });
     }
 }

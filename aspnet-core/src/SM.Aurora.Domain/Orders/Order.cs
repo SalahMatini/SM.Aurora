@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SM.Aurora.Customers;
+using System;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace SM.Aurora.Orders
@@ -10,6 +11,9 @@ namespace SM.Aurora.Orders
         public OrderStatus OrderStatus { get; set; }
         public string ShippingAddress { get; set; }
 
+
+        public Customer Customer { get; set; }
+        public Guid CustomerId { get; set; }
 
     }
 }

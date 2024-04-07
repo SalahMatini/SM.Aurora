@@ -1,6 +1,7 @@
 ﻿using System;
 using Volo.Abp.Application.Dtos;
 
+
 namespace SM.Aurora.Orders
 {
     public class OrderDto : FullAuditedEntityDto<Guid>
@@ -14,5 +15,9 @@ namespace SM.Aurora.Orders
 
         public string ShippingAddress { get; set; }
 
+
+        public CustomerLookupDto Customer { get; set; }
+        public Guid CustomerId { get; set; }
+        public string CustomerFullName { get; set; }
     }
 }

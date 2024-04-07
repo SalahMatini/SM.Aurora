@@ -2,7 +2,9 @@ import { ListService, PagedResultDto } from '@abp/ng.core';
 import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { OrderService, OrderDto, orderStatusOptions } from '@proxy/orders';
+import { CustomerDto, CustomerService } from '@proxy/customers';
+import { OrderService, OrderDto, orderStatusOptions, CustomerLookupDto } from '@proxy/orders';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -18,10 +20,13 @@ export class OrderComponent implements OnInit {
 
   orderStatuses = orderStatusOptions;
 
+  customers$: Observable<CustomerLookupDto[]>;
+
   selectedOrder = {} as OrderDto;
 
   constructor(
     public readonly list: ListService,
+    private customerService: CustomerService,
     private orderService: OrderService,
     private fb: FormBuilder,
     private confirmation: ConfirmationService
@@ -29,6 +34,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
     this.loadOrders();
+    this.loadCustomers();
   }
 
   createOrder() {
@@ -78,12 +84,20 @@ export class OrderComponent implements OnInit {
     });
   }
 
+  loadCustomers() {
+    this.customers$ = this.customerService.getList({ maxResultCount: 100 }).pipe(
+      map(result => result.items) // Extract the list of customers from the response
+    );
+  }
+
   buildForm() {
     this.form = this.fb.group({
+      customerId: [this.selectedOrder.customerId || null, Validators.required],
       orderStatus: [this.selectedOrder.orderStatus || null, Validators.required],
       shippingAddress: [this.selectedOrder.shippingAddress || '', Validators.required],
     });
     console.log('Form built successfully.');
   }
+
   //#endregion
 }

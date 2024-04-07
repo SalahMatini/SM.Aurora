@@ -1,5 +1,5 @@
-﻿using System;
-using SM.Aurora.Shared;
+﻿using SM.Aurora.Shared;
+using System;
 using Volo.Abp.Application.Dtos;
 
 namespace SM.Aurora.Customers
