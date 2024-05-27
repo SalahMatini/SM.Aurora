@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SM.Aurora.Orders
@@ -15,6 +16,8 @@ namespace SM.Aurora.Orders
         public string ShippingAddress { get; set; }
 
         public Guid CustomerId { get; set; }
+
+        public List<int> BikeIds { get; set; } = [];
 
     }
 }

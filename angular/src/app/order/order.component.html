@@ -8,7 +8,8 @@
             </div>
             <div class="text-end col col-md-6">
                 <div class="text-lg-end pt-2">
-                    <button *abpPermission="'BikeShop.Orders.Create'" id="create" class="btn btn-primary" type="button" (click)="createOrder()">
+                    <button *abpPermission="'BikeShop.Orders.Create'" id="create" class="btn btn-primary" type="button"
+                        [routerLink]="['create']">
                         <i class="fa fa-plus me-1"></i>
                         <span>{{ "::NewOrder" | abpLocalization }}</span>
                     </button>
@@ -17,13 +18,14 @@
         </div>
     </div>
     <div class="card-body">
+
         <ngx-datatable [rows]="order.items" [count]="order.totalCount" [list]="list" default>
-            
+
             <ngx-datatable-column [name]="'::Actions' | abpLocalization" [maxWidth]="150" [sortable]="false">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     <div ngbDropdown container="body" class="d-inline-block">
-                        <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            ngbDropdownToggle>
+                        <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" ngbDropdownToggle>
                             <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                         </button>
                         <div ngbDropdownMenu>
@@ -39,10 +41,10 @@
             </ngx-datatable-column>
 
             <ngx-datatable-column [name]="'::OrderId' | abpLocalization" prop="orderId">
-            <ng-template let-value="value" ngx-datatable-cell-template>
-                #{{ value }}
-            </ng-template>
-        </ngx-datatable-column>
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    #{{ value }}
+                </ng-template>
+            </ngx-datatable-column>
             <ngx-datatable-column [name]="'::OrderDate' | abpLocalization" prop="orderDate">
                 <ng-template let-row="row" ngx-datatable-cell-template>
                     {{ row.orderDate | date }}
@@ -53,7 +55,8 @@
                     {{ '::Enum:OrderStatus.' + row.orderStatus | abpLocalization }}
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column [name]="'::ShippingAddress' | abpLocalization" prop="shippingAddress"></ngx-datatable-column>
+            <ngx-datatable-column [name]="'::ShippingAddress' | abpLocalization"
+                prop="shippingAddress"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::Customer' | abpLocalization" prop="customerId"
                 [sortable]="false"></ngx-datatable-column>
 
@@ -73,26 +76,37 @@
 
     <ng-template #abpBody>
         <form [formGroup]="form" (ngSubmit)="save()">
-            
+
             <div class="form-group">
                 <label for="customer-id">Customer</label><span> * </span>
                 <select class="form-control" id="customer-id" formControlName="customerId">
                     <option [ngValue]="null">Select customer</option>
                     <option *ngFor="let customer of customers$ | async" [value]="customer.id">
-                    {{ customer.fullName }}
-                </option>
+                        {{ customer.fullName }}
+                    </option>
                 </select>
             </div>
-            
+
 
             <div class="mt-2">
                 <label for="order-orderStatus">Order Status</label><span> * </span>
                 <select class="form-control" id="order-orderStatus" formControlName="orderStatus">
                     <option [ngValue]="null">Select order's Status</option>
-                    <option [ngValue]="type.value" *ngFor="let type of orderStatuses"> {{ '::Enum:OrderStatus.' + type.value |
+                    <option [ngValue]="type.value" *ngFor="let type of orderStatuses"> {{ '::Enum:OrderStatus.' +
+                        type.value |
                         abpLocalization }}</option>
                 </select>
             </div>
+
+            <mat-form-field class="w-100 mt-2" appearance="outline">
+                <mat-label>Bike</mat-label>
+                <mat-select>
+                    @for (bike of bikeLookup; track bike) {
+                    <mat-option [value]="bike.id">{{bike.name}}</mat-option>
+                    }
+                </mat-select>
+                <mat-error>This filed is require.</mat-error>
+            </mat-form-field>
 
             <div class="mt-2">
                 <label for="order-shippingAddress">Shipping Address</label><span> * </span>

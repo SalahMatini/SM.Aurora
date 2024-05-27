@@ -82,7 +82,7 @@ export class BikeComponent implements OnInit {
     this.form = this.fb.group({
       brand: [this.selectedBike.brand || '', Validators.required],
       model: [this.selectedBike.model || '', Validators.required],
-      type: [this.selectedBike.type || null, Validators.required],
+      type: [this.selectedBike.type || -1, Validators.required],
       color: [this.selectedBike.color || '', Validators.required],
       releaseYear: [this.selectedBike.releaseYear || null, Validators.required],
       price: [this.selectedBike.price || null, Validators.required],

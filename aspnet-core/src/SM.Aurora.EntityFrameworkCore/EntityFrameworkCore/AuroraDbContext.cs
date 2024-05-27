@@ -119,7 +119,7 @@ public class AuroraDbContext :
                 AuroraConsts.DbSchema);
             o.ConfigureByConvention(); //auto configure for the base class props
 
-            o.HasKey(x => x.OrderId);
+
 
             o.Property(x => x.OrderDate).IsRequired();
             o.Property(x => x.OrderStatus).IsRequired();

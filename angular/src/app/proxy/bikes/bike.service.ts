@@ -2,6 +2,7 @@ import type { BikeDto, CreateUpdateBikeDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
+import type { LookupDto } from '../lookups/models';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,14 @@ export class BikeService {
     this.restService.request<any, BikeDto>({
       method: 'GET',
       url: `/api/app/bike/${id}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getBikeLookup = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, LookupDto[]>({
+      method: 'GET',
+      url: '/api/app/bike/bike-lookup',
     },
     { apiName: this.apiName,...config });
   

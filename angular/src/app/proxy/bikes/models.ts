@@ -1,7 +1,7 @@
-import type { AuditedEntityDto } from '@abp/ng.core';
+import type { EntityDto } from '@abp/ng.core';
 import type { BikeType } from './bike-type.enum';
 
-export interface BikeDto extends AuditedEntityDto<string> {
+export interface BikeDto extends EntityDto<string> {
   brand?: string;
   model?: string;
   type: BikeType;

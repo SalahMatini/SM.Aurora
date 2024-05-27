@@ -3,7 +3,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace SM.Aurora.Bikes
 {
-    public class BikeDto : AuditedEntityDto<Guid>
+    public class BikeDto : EntityDto<Guid>
     {
         public string Brand { get; set; }
 

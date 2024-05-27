@@ -83,7 +83,7 @@
             <div class="mt-2">
                 <label for="bike-type">Type</label><span> * </span>
                 <select class="form-control" id="bike-type" formControlName="type">
-                    <option [ngValue]="null">Select a bike type</option>
+                    <option value="-1">Select a bike type</option>
                     <option [ngValue]="type.value" *ngFor="let type of bikeTypes"> {{ '::Enum:BikeType.' + type.value |
                         abpLocalization }}</option>
                 </select>
