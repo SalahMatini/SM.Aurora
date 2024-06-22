@@ -2,6 +2,7 @@ import type { CreateUpdateCustomerDto, CustomerDetailsDto, CustomerDto } from '.
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
+import type { LookupDto } from '../lookups/models';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,14 @@ export class CustomerService {
     this.restService.request<any, CustomerDetailsDto>({
       method: 'GET',
       url: `/api/app/customer/${id}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getCustomerLookup = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, LookupDto[]>({
+      method: 'GET',
+      url: '/api/app/customer/customer-lookup',
     },
     { apiName: this.apiName,...config });
   

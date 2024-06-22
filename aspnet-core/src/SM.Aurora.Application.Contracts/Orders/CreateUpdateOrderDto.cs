@@ -15,7 +15,7 @@ namespace SM.Aurora.Orders
         [StringLength(256)]
         public string ShippingAddress { get; set; }
 
-        public Guid CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         public List<int> BikeIds { get; set; } = [];
 

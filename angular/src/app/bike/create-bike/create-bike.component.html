@@ -1,0 +1,54 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="mt-2">
+                <label for="bike-brand">Brand</label><span> * </span>
+                <input type="text" id="bike-brand" class="form-control" formControlName="brand" autofocus />
+            </div>
+
+            <div class="mt-2">
+                <label for="bike-model">Model</label><span> * </span>
+                <input type="text" id="bike-model" class="form-control" formControlName="model" autofocus />
+            </div>
+
+            <div class="mt-2">
+                <mat-form-field>
+                    <mat-label>Bike Type</mat-label>
+                    <mat-select>
+                        @for (bikeType of bikeTypes; track bikeType) {
+                        <mat-option [value]="bikeType.value">{{ '::Enum:BikeType.' + bikeType.value | abpLocalization
+                            }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="mt-2">
+                <label for="bike-color">Color</label><span> * </span>
+                <input type="text" id="bike-color" class="form-control" formControlName="color" autofocus />
+            </div>
+
+            <div class="mt-2">
+                <label for="bike-releaseYear">Release Year</label><span> * </span>
+                <input type="number" id="bike-releaseYear" class="form-control" formControlName="releaseYear"
+                    autofocus />
+            </div>
+
+            <div class="mt-2">
+                <label for="bike-price">Price</label><span> * </span>
+                <input type="number" id="bike-price" class="form-control" formControlName="price" />
+            </div>
+
+            <div class="pt-2">
+                <button type="button" class="btn btn-secondary m-1" [routerLink]="['/bikes']">
+                    {{ '::Cancel' | abpLocalization }}
+                </button>
+
+                <button class="btn btn-primary">
+                    <i class="fa fa-check mr-1"></i>
+                    {{ '::Save' | abpLocalization }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

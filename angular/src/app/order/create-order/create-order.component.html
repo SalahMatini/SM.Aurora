@@ -1,0 +1,53 @@
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="save()">
+
+
+            <div class="mt-2">
+                <mat-form-field class="w-100 mt-2" appearance="outline">
+                    <mat-label>Customer</mat-label>
+                    <mat-select>
+                        @for (customer of customerLookup; track customer) {
+                        <mat-option [value]="customer.id">{{customer.name}}</mat-option>
+                        }
+                    </mat-select>
+                    <mat-error>This filed is require.</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="mt-2">
+                <mat-form-field class="w-100 mt-2" appearance="outline">
+                    <mat-label>Order Status</mat-label>
+                    <mat-select>
+                        @for (orderStatus of orderStatuses; track orderStatus) {
+                        <mat-option [value]="orderStatus.value">{{ '::Enum:OrderStatus.' + orderStatus.value |
+                            abpLocalization
+                            }}</mat-option>
+                        }
+                    </mat-select>
+                    <mat-error>This filed is require.</mat-error>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field class="w-100 mt-2" appearance="outline">
+                <mat-label>Bike</mat-label>
+                <mat-select>
+                    @for (bike of bikeLookup; track bike) {
+                    <mat-option [value]="bike.id">{{bike.name}}</mat-option>
+                    }
+                </mat-select>
+                <mat-error>This filed is require.</mat-error>
+            </mat-form-field>
+
+            <div class="mt-2">
+                <label for="order-shippingAddress">Shipping Address</label><span> * </span>
+                <input type="text" id="order-shippingAddress" class="form-control" formControlName="shippingAddress" />
+            </div>
+
+            <div class="pt-2"><button type="button" class="btn btn-secondary m-1"
+                    [routerLink]="['/orders']">{{'::Cancel'|abpLocalization}}</button><button class="btn btn-primary"><i
+                        class="fa fa-check mr-1"></i>{{'::Save'|abpLocalization}}</button></div>
+        </form>
+    </div>
+</div>

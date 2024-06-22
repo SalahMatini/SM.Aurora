@@ -1,6 +1,7 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CoreModule } from '@abp/ng.core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgModule } from '@angular/core';
 import { ThemeSharedModule } from '@abp/ng.theme.shared';
 import { NgxValidateCoreModule } from '@ngx-validate/core';
 import { MaterialModule } from './material.module';
@@ -8,6 +9,7 @@ import { MaterialModule } from './material.module';
 @NgModule({
   declarations: [],
   imports: [
+    CommonModule,
     CoreModule,
     ThemeSharedModule,
     NgbDropdownModule,
@@ -15,6 +17,7 @@ import { MaterialModule } from './material.module';
     MaterialModule,
   ],
   exports: [
+    CommonModule,
     CoreModule,
     ThemeSharedModule,
     NgbDropdownModule,

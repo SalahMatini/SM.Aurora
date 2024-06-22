@@ -9,7 +9,8 @@
             <div class="text-end col col-md-6">
                 <!-- Add the "new book" button here -->
                 <div class="text-lg-end pt-2">
-                    <button *abpPermission="'BikeShop.Customers.Create'" id="create" class="btn btn-primary" type="button" (click)="createCustomer()">
+                    <button *abpPermission="'BikeShop.Customers.Create'" id="create" class="btn btn-primary"
+                        type="button" [routerLink]="['create']">
                         <i class="fa fa-plus me-1"></i>
                         <span>{{ "::NewCustomer" | abpLocalization }}</span>
                     </button>
@@ -28,10 +29,12 @@
                             <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                         </button>
                         <div ngbDropdownMenu>
-                            <button *abpPermission="'BikeShop.Customers.Edit'" ngbDropdownItem (click)="editCustomer(row.id)">
+                            <button *abpPermission="'BikeShop.Customers.Edit'" ngbDropdownItem
+                                [routerLink]="['edit', row.id]">
                                 {{ '::Edit' | abpLocalization }}
                             </button>
-                            <button *abpPermission="'BikeShop.Customers.Delete'" ngbDropdownItem (click)="delete(row.id)">
+                            <button *abpPermission="'BikeShop.Customers.Delete'" ngbDropdownItem
+                                (click)="delete(row.id)">
                                 {{ '::Delete' | abpLocalization }}
                             </button>
                         </div>
@@ -55,76 +58,3 @@
         </ngx-datatable>
     </div>
 </div>
-
-<!-- Add the modal here -->
-<abp-modal [(visible)]="isModalOpen">
-    <ng-template #abpHeader>
-        <h3>{{ (selectedCustomer.id ? '::Edit' : '::NewCustomer' ) | abpLocalization }}</h3>
-    </ng-template>
-
-    <ng-template #abpBody>
-        <form [formGroup]="form" (ngSubmit)="save()">
-            <div class="mt-2">
-                <label for="customer-firstName">First Name</label><span> * </span>
-                <input type="text" id="customer-firstName" class="form-control" formControlName="firstName" autofocus />
-            </div>
-
-            <div class="mt-2">
-                <label for="customer-lastName">Last Name</label><span> * </span>
-                <input type="text" id="customer-lastName" class="form-control" formControlName="lastName" />
-            </div>
-
-            <div class="mt-2">
-                <label>Date of birth</label><span> * </span>
-                <input #datepicker="ngbDatepicker" class="form-control" name="datepicker" formControlName="dateOfBirth"
-                    ngbDatepicker (click)="datepicker.toggle()" />
-            </div>
-
-            <div class="mt-2">
-                <label for="customer-gender">Gender</label><span> * </span>
-                <select class="form-control" id="customer-gender" formControlName="gender">
-                    <option [ngValue]="null">Select customer's gender</option>
-                    <option [ngValue]="type.value" *ngFor="let type of genders"> {{ '::Enum:Gender.' + type.value |
-                        abpLocalization }}</option>
-                </select>
-            </div>
-
-            <div class="mt-2">
-                <label for="customer-email">Email</label><span> * </span>
-                <input type="text" id="customer-email" class="form-control" formControlName="email" />
-            </div>
-
-            <div class="mt-2">
-                <label for="customer-phoneNumber">Phone Number</label><span> * </span>
-                <input type="text" id="customer-phoneNumber" class="form-control" formControlName="phoneNumber" />
-            </div>
-
-            <div class="mt-2">
-                <label for="customer-country">Country</label><span> * </span>
-                <select class="form-control" id="customer-country" formControlName="country">
-                    <option [ngValue]="null">Select customer's country</option>
-                    <option [ngValue]="type.value" *ngFor="let type of countries"> {{ '::Enum:Country.' + type.value |
-                        abpLocalization }}</option>
-                </select>
-            </div>
-
-            <div class="mt-2">
-                <label for="customer-address">Address</label><span> * </span>
-                <input type="text" id="customer-address" class="form-control" formControlName="address" />
-            </div>
-        </form>
-    </ng-template>
-
-    <ng-template #abpFooter>
-        <button type="button" class="btn btn-secondary" abpClose>
-            {{ '::Close' | abpLocalization }}
-        </button>
-
-        <!--added save button-->
-        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
-            <i class="fa fa-check mr-1"></i>
-            {{ '::Save' | abpLocalization }}
-        </button>
-    </ng-template>
-</abp-modal>
-

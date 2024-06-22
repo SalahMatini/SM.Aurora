@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SM.Aurora.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace SM.Aurora.Migrations
 {
     [DbContext(typeof(AuroraDbContext))]
-    partial class AuroraDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240527225516_Add-OrderBike-many-to-many")]
+    partial class AddOrderBikemanytomany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,22 +177,20 @@ namespace SM.Aurora.Migrations
 
             modelBuilder.Entity("SM.Aurora.OrderBikes.OrderBike", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BikeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("OrderId")
+                    b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("OrderId", "BikeId");
 
                     b.HasIndex("BikeId");
 
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderBike");
+                    b.ToTable("AppOrderBikes", (string)null);
                 });
 
             modelBuilder.Entity("SM.Aurora.Orders.Order", b =>

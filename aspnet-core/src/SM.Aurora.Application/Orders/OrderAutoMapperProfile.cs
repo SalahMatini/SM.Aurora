@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using SM.Aurora.Customers;
 
 namespace SM.Aurora.Orders
 {
@@ -9,7 +8,6 @@ namespace SM.Aurora.Orders
         {
             CreateMap<Order, OrderDto>();
             CreateMap<CreateUpdateOrderDto, Order>();
-            CreateMap<Customer, CustomerLookupDto>();
         }
     }
 }

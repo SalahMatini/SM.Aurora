@@ -1659,15 +1659,15 @@
             }
           ],
           "actions": {
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
+            "CreateAsyncByCreateUpdateOrderDto": {
+              "uniqueName": "CreateAsyncByCreateUpdateOrderDto",
               "name": "CreateAsync",
               "httpMethod": "POST",
               "url": "api/app/order",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
-                  "name": "input",
+                  "name": "createUpdateOrderDto",
                   "typeAsString": "SM.Aurora.Orders.CreateUpdateOrderDto, SM.Aurora.Application.Contracts",
                   "type": "SM.Aurora.Orders.CreateUpdateOrderDto",
                   "typeSimple": "SM.Aurora.Orders.CreateUpdateOrderDto",
@@ -1677,8 +1677,8 @@
               ],
               "parameters": [
                 {
-                  "nameOnMethod": "input",
-                  "name": "input",
+                  "nameOnMethod": "createUpdateOrderDto",
+                  "name": "createUpdateOrderDto",
                   "jsonName": null,
                   "type": "SM.Aurora.Orders.CreateUpdateOrderDto",
                   "typeSimple": "SM.Aurora.Orders.CreateUpdateOrderDto",
@@ -1999,6 +1999,21 @@
             }
           ],
           "actions": {
+            "GetCustomerLookup": {
+              "uniqueName": "GetCustomerLookup",
+              "name": "GetCustomerLookup",
+              "httpMethod": "GET",
+              "url": "api/app/customer/customer-lookup",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.IEnumerable<SM.Aurora.Lookups.LookupDto>",
+                "typeSimple": "[SM.Aurora.Lookups.LookupDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "SM.Aurora.Customers.CustomerAppService"
+            },
             "CreateAsyncByInput": {
               "uniqueName": "CreateAsyncByInput",
               "name": "CreateAsync",
@@ -9830,8 +9845,20 @@
         {
           "name": "CustomerId",
           "jsonName": null,
-          "type": "System.Guid",
-          "typeSimple": "string",
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "BikeIds",
+          "jsonName": null,
+          "type": "[System.Int32]",
+          "typeSimple": "[number]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -9906,42 +9933,6 @@
         },
         {
           "name": "ShippingAddress",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Customer",
-          "jsonName": null,
-          "type": "SM.Aurora.Orders.CustomerLookupDto",
-          "typeSimple": "SM.Aurora.Orders.CustomerLookupDto",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "CustomerId",
-          "jsonName": null,
-          "type": "System.Guid",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "CustomerFullName",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -10102,15 +10093,15 @@
       "genericArguments": null,
       "properties": []
     },
-    "SM.Aurora.Orders.CustomerLookupDto": {
-      "baseType": "Volo.Abp.Application.Dtos.AuditedEntityDto<System.Guid>",
+    "SM.Aurora.Lookups.LookupDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
       "isEnum": false,
       "enumNames": null,
       "enumValues": null,
       "genericArguments": null,
       "properties": [
         {
-          "name": "FullName",
+          "name": "Name",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -10828,27 +10819,6 @@
         },
         {
           "name": "Email",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        }
-      ]
-    },
-    "SM.Aurora.Lookups.LookupDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "Name",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",

@@ -29,7 +29,8 @@
                             <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                         </button>
                         <div ngbDropdownMenu>
-                            <button *abpPermission="'BikeShop.Orders.Edit'" ngbDropdownItem (click)="editOrder(row.id)">
+                            <button *abpPermission="'BikeShop.Orders.Edit'" ngbDropdownItem
+                                [routerLink]="['edit', row.id]">
                                 {{ '::Edit' | abpLocalization }}
                             </button>
                             <button *abpPermission="'BikeShop.Orders.Delete'" ngbDropdownItem (click)="delete(row.id)">
@@ -64,66 +65,3 @@
         </ngx-datatable>
     </div>
 </div>
-
-
-
-
-<!-- Add the modal here -->
-<abp-modal [(visible)]="isModalOpen">
-    <ng-template #abpHeader>
-        <h3>{{ (selectedOrder.id ? '::Edit' : '::NewOrder' ) | abpLocalization }}</h3>
-    </ng-template>
-
-    <ng-template #abpBody>
-        <form [formGroup]="form" (ngSubmit)="save()">
-
-            <div class="form-group">
-                <label for="customer-id">Customer</label><span> * </span>
-                <select class="form-control" id="customer-id" formControlName="customerId">
-                    <option [ngValue]="null">Select customer</option>
-                    <option *ngFor="let customer of customers$ | async" [value]="customer.id">
-                        {{ customer.fullName }}
-                    </option>
-                </select>
-            </div>
-
-
-            <div class="mt-2">
-                <label for="order-orderStatus">Order Status</label><span> * </span>
-                <select class="form-control" id="order-orderStatus" formControlName="orderStatus">
-                    <option [ngValue]="null">Select order's Status</option>
-                    <option [ngValue]="type.value" *ngFor="let type of orderStatuses"> {{ '::Enum:OrderStatus.' +
-                        type.value |
-                        abpLocalization }}</option>
-                </select>
-            </div>
-
-            <mat-form-field class="w-100 mt-2" appearance="outline">
-                <mat-label>Bike</mat-label>
-                <mat-select>
-                    @for (bike of bikeLookup; track bike) {
-                    <mat-option [value]="bike.id">{{bike.name}}</mat-option>
-                    }
-                </mat-select>
-                <mat-error>This filed is require.</mat-error>
-            </mat-form-field>
-
-            <div class="mt-2">
-                <label for="order-shippingAddress">Shipping Address</label><span> * </span>
-                <input type="text" id="order-shippingAddress" class="form-control" formControlName="shippingAddress" />
-            </div>
-        </form>
-    </ng-template>
-
-    <ng-template #abpFooter>
-        <button type="button" class="btn btn-secondary" abpClose>
-            {{ '::Close' | abpLocalization }}
-        </button>
-
-        <!--added save button-->
-        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid">
-            <i class="fa fa-check mr-1"></i>
-            {{ '::Save' | abpLocalization }}
-        </button>
-    </ng-template>
-</abp-modal>

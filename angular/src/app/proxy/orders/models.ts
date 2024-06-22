@@ -1,15 +1,12 @@
 import type { OrderStatus } from './order-status.enum';
-import type { AuditedEntityDto, FullAuditedEntityDto } from '@abp/ng.core';
+import type { FullAuditedEntityDto } from '@abp/ng.core';
 
 export interface CreateUpdateOrderDto {
   orderDate?: string;
   orderStatus: OrderStatus;
   shippingAddress: string;
-  customerId?: string;
-}
-
-export interface CustomerLookupDto extends AuditedEntityDto<string> {
-  fullName?: string;
+  customerId: number;
+  bikeIds: number[];
 }
 
 export interface OrderDto extends FullAuditedEntityDto<string> {
@@ -17,7 +14,4 @@ export interface OrderDto extends FullAuditedEntityDto<string> {
   orderDate?: string;
   orderStatus: OrderStatus;
   shippingAddress?: string;
-  customer: CustomerLookupDto;
-  customerId?: string;
-  customerFullName?: string;
 }

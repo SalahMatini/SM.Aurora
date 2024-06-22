@@ -10,11 +10,11 @@ export class OrderService {
   apiName = 'Default';
   
 
-  create = (input: CreateUpdateOrderDto, config?: Partial<Rest.Config>) =>
+  create = (createUpdateOrderDto: CreateUpdateOrderDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, OrderDto>({
       method: 'POST',
       url: '/api/app/order',
-      body: input,
+      body: createUpdateOrderDto,
     },
     { apiName: this.apiName,...config });
   
