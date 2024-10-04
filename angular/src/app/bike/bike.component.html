@@ -27,6 +27,11 @@
                             <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                         </button>
                         <div ngbDropdownMenu>
+
+                            <button ngbDropdownItem [routerLink]="['details', row.id]">
+                                {{ '::Details' | abpLocalization }}
+                            </button>
+
                             <!-- Add the abpPermission directive -->
                             <button *abpPermission="'BikeShop.Bikes.Edit'" ngbDropdownItem
                                 [routerLink]="['edit', row.id]">
@@ -44,10 +49,7 @@
 
             <ngx-datatable-column [name]="'::Brand' | abpLocalization" prop="brand"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::Model' | abpLocalization" prop="model"></ngx-datatable-column>
-            <ngx-datatable-column [name]="'::Type' | abpLocalization" prop="type">
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{ '::Enum:BikeType.' + row.type | abpLocalization }}
-                </ng-template>
+            <ngx-datatable-column [name]="'::BikeType' | abpLocalization" prop="bikeType.name">
             </ngx-datatable-column>
             <ngx-datatable-column [name]="'::Color' | abpLocalization" prop="color"></ngx-datatable-column>
             <ngx-datatable-column [name]="'::ReleaseYear' | abpLocalization" prop="releaseYear">

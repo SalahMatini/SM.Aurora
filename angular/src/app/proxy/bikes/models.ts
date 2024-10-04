@@ -1,20 +1,31 @@
 import type { EntityDto } from '@abp/ng.core';
-import type { BikeType } from './bike-type.enum';
+import type { BikeTypeDto } from '../bike-types/models';
+
+export interface BikeDetailsDto extends EntityDto<string> {
+  brand?: string;
+  model?: string;
+  color?: string;
+  releaseYear: number;
+  price: number;
+  bikeTypeId?: string;
+  bikeType: BikeTypeDto;
+}
 
 export interface BikeDto extends EntityDto<string> {
   brand?: string;
   model?: string;
-  type: BikeType;
   color?: string;
   releaseYear: number;
   price: number;
+  bikeTypeId?: string;
+  bikeType: BikeTypeDto;
 }
 
 export interface CreateUpdateBikeDto {
   brand: string;
   model: string;
-  type: BikeType;
   color: string;
   releaseYear: number;
   price: number;
+  bikeTypeId: string;
 }

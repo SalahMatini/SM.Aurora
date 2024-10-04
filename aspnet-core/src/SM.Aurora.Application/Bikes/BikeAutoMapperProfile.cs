@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using SM.Aurora.Bikes;
 
 namespace SM.Aurora.Bikes;
 
@@ -9,5 +8,6 @@ public class BikeAutoMapperProfile : Profile
     {
         CreateMap<Bike, BikeDto>();
         CreateMap<CreateUpdateBikeDto, Bike>();
+        CreateMap<Bike, BikeDetailsDto>();
     }
 }

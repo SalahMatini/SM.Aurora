@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace SM.Aurora.Migrations
 {
     [DbContext(typeof(AuroraDbContext))]
-    [Migration("20240526214936_init")]
-    partial class init
+    [Migration("20240623212947_DateTime_Fix")]
+    partial class DateTime_Fix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,8 +117,8 @@ namespace SM.Aurora.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("DateOfBirth")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<Guid?>("DeleterId")
                         .HasColumnType("uniqueidentifier")
@@ -173,6 +173,21 @@ namespace SM.Aurora.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppCustomers", (string)null);
+                });
+
+            modelBuilder.Entity("SM.Aurora.OrderBikes.OrderBike", b =>
+                {
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BikeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("OrderId", "BikeId");
+
+                    b.HasIndex("BikeId");
+
+                    b.ToTable("AppOrderBikes", (string)null);
                 });
 
             modelBuilder.Entity("SM.Aurora.Orders.Order", b =>
@@ -1984,6 +1999,25 @@ namespace SM.Aurora.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("SM.Aurora.OrderBikes.OrderBike", b =>
+                {
+                    b.HasOne("SM.Aurora.Bikes.Bike", "Bike")
+                        .WithMany("OrderBikes")
+                        .HasForeignKey("BikeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SM.Aurora.Orders.Order", "Order")
+                        .WithMany("OrderBikes")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bike");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("SM.Aurora.Orders.Order", b =>
                 {
                     b.HasOne("SM.Aurora.Customers.Customer", "Customer")
@@ -2135,6 +2169,16 @@ namespace SM.Aurora.Migrations
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SM.Aurora.Bikes.Bike", b =>
+                {
+                    b.Navigation("OrderBikes");
+                });
+
+            modelBuilder.Entity("SM.Aurora.Orders.Order", b =>
+                {
+                    b.Navigation("OrderBikes");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

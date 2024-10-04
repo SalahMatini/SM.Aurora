@@ -9,7 +9,7 @@ namespace SM.Aurora.Customers
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTimeOffset DateOfBirth { get; set; }
         public Gender Gender { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
@@ -31,7 +31,7 @@ namespace SM.Aurora.Customers
         {
             get
             {
-                DateTime today = DateTime.Today;
+                DateTimeOffset today = DateTimeOffset.Now;
                 TimeSpan ageSpan = today - DateOfBirth;
 
 

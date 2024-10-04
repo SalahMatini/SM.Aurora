@@ -1,11 +1,10 @@
 ﻿using SM.Aurora.Bikes;
 using SM.Aurora.Orders;
 using System;
-using Volo.Abp.Domain.Entities;
 
 namespace SM.Aurora.OrderBikes
 {
-    public class OrderBike : Entity<Guid>
+    public class OrderBike
     {
         public Guid OrderId { get; set; }
         public Order Order { get; set; }

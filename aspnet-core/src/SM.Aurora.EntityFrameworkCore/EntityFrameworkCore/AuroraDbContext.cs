@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SM.Aurora.Bikes;
+using SM.Aurora.Biketypes;
 using SM.Aurora.Customers;
+using SM.Aurora.OrderBikes;
 using SM.Aurora.Orders;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -32,6 +34,8 @@ public class AuroraDbContext :
     public DbSet<Bike> Bikes { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderBike> OrderBikes { get; set; }
+    public DbSet<BikeType> BikeTypes { get; set; }
 
     #region Entities from the modules
 
@@ -84,6 +88,15 @@ public class AuroraDbContext :
 
         /* Configure your own tables/entities inside here */
 
+
+        builder.Entity<BikeType>(b =>
+        {
+            b.ToTable(AuroraConsts.DbTablePrefix + "BikeType",
+                AuroraConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+        });
+
         builder.Entity<Bike>(b =>
         {
             b.ToTable(AuroraConsts.DbTablePrefix + "Bikes",
@@ -91,10 +104,11 @@ public class AuroraDbContext :
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Brand).IsRequired().HasMaxLength(128);
             b.Property(x => x.Model).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Type).IsRequired();
             b.Property(x => x.Color).IsRequired().HasMaxLength(50);
             b.Property(x => x.ReleaseYear).IsRequired();
             b.Property(x => x.Price).IsRequired();
+
+            //b.HasOne<BikeType>(o => o.BikeType).WithMany().HasForeignKey(x => x.BikeTypeId).IsRequired();
         });
 
         builder.Entity<Customer>(c =>
@@ -126,6 +140,24 @@ public class AuroraDbContext :
             o.Property(x => x.ShippingAddress).IsRequired().HasMaxLength(256);
 
             o.HasOne<Customer>(o => o.Customer).WithMany().HasForeignKey(x => x.CustomerId).IsRequired();
+        });
+
+        builder.Entity<OrderBike>(ob =>
+        {
+            ob.ToTable(AuroraConsts.DbTablePrefix + "OrderBikes", AuroraConsts.DbSchema);
+            ob.ConfigureByConvention(); //auto configure for the base class props
+
+            ob.HasKey(ob => new { ob.OrderId, ob.BikeId });
+
+            ob.HasOne(ob => ob.Order)
+                .WithMany(o => o.OrderBikes)
+                .HasForeignKey(ob => ob.OrderId)
+                .IsRequired();
+
+            ob.HasOne(ob => ob.Bike)
+                .WithMany(b => b.OrderBikes)
+                .HasForeignKey(ob => ob.BikeId)
+                .IsRequired();
         });
     }
 }

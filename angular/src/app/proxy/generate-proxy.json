@@ -1575,8 +1575,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "SM.Aurora.Orders.OrderDto",
-                    "typeSimple": "SM.Aurora.Orders.OrderDto"
+                    "type": "SM.Aurora.Orders.OrderDetailsDto",
+                    "typeSimple": "SM.Aurora.Orders.OrderDetailsDto"
                   }
                 },
                 {
@@ -1609,8 +1609,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "SM.Aurora.Orders.OrderDto",
-                    "typeSimple": "SM.Aurora.Orders.OrderDto"
+                    "type": "SM.Aurora.Orders.OrderDetailsDto",
+                    "typeSimple": "SM.Aurora.Orders.OrderDetailsDto"
                   }
                 },
                 {
@@ -1634,8 +1634,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "SM.Aurora.Orders.OrderDto",
-                    "typeSimple": "SM.Aurora.Orders.OrderDto"
+                    "type": "SM.Aurora.Orders.OrderDetailsDto",
+                    "typeSimple": "SM.Aurora.Orders.OrderDetailsDto"
                   }
                 },
                 {
@@ -1690,11 +1690,85 @@
                 }
               ],
               "returnValue": {
-                "type": "SM.Aurora.Orders.OrderDto",
-                "typeSimple": "SM.Aurora.Orders.OrderDto"
+                "type": "SM.Aurora.Orders.OrderDetailsDto",
+                "typeSimple": "SM.Aurora.Orders.OrderDetailsDto"
               },
               "allowAnonymous": null,
-              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<SM.Aurora.Orders.OrderDto,SM.Aurora.Orders.CreateUpdateOrderDto>"
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<SM.Aurora.Orders.OrderDetailsDto,SM.Aurora.Orders.CreateUpdateOrderDto>"
+            },
+            "GetListByCustomerAsyncByCustomerId": {
+              "uniqueName": "GetListByCustomerAsyncByCustomerId",
+              "name": "GetListByCustomerAsync",
+              "httpMethod": "GET",
+              "url": "api/app/order/by-customer/{customerId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "customerId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "customerId",
+                  "name": "customerId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<SM.Aurora.Orders.OrderDto>",
+                "typeSimple": "[SM.Aurora.Orders.OrderDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "SM.Aurora.Orders.OrderAppService"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/order/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "SM.Aurora.Orders.OrderDetailsDto",
+                "typeSimple": "SM.Aurora.Orders.OrderDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.Orders.OrderDetailsDto,SM.Aurora.Orders.OrderDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             },
             "UpdateAsyncByIdAndInput": {
               "uniqueName": "UpdateAsyncByIdAndInput",
@@ -1747,11 +1821,11 @@
                 }
               ],
               "returnValue": {
-                "type": "SM.Aurora.Orders.OrderDto",
-                "typeSimple": "SM.Aurora.Orders.OrderDto"
+                "type": "SM.Aurora.Orders.OrderDetailsDto",
+                "typeSimple": "SM.Aurora.Orders.OrderDetailsDto"
               },
               "allowAnonymous": null,
-              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<SM.Aurora.Orders.OrderDto,System.Guid,SM.Aurora.Orders.CreateUpdateOrderDto>"
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<SM.Aurora.Orders.OrderDetailsDto,System.Guid,SM.Aurora.Orders.CreateUpdateOrderDto>"
             },
             "DeleteAsyncById": {
               "uniqueName": "DeleteAsyncById",
@@ -1789,43 +1863,6 @@
               },
               "allowAnonymous": null,
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
-            },
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/app/order/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "SM.Aurora.Orders.OrderDto",
-                "typeSimple": "SM.Aurora.Orders.OrderDto"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.Orders.OrderDto,SM.Aurora.Orders.OrderDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             },
             "GetListAsyncByInput": {
               "uniqueName": "GetListAsyncByInput",
@@ -1886,7 +1923,7 @@
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<SM.Aurora.Orders.OrderDto>"
               },
               "allowAnonymous": null,
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.Orders.OrderDto,SM.Aurora.Orders.OrderDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.Orders.OrderDetailsDto,SM.Aurora.Orders.OrderDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             }
           }
         },
@@ -2245,6 +2282,361 @@
             }
           }
         },
+        "SM.Aurora.BikeTypes.BikeTypeAppService": {
+          "controllerName": "BikeType",
+          "controllerGroupName": "BikeType",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "SM.Aurora.BikeTypes.BikeTypeAppService",
+          "interfaces": [
+            {
+              "type": "SM.Aurora.BikeTypes.IBikeTypeAppService",
+              "name": "IBikeTypeAppService",
+              "methods": [
+                {
+                  "name": "GetAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                    "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto"
+                  }
+                },
+                {
+                  "name": "GetListAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                      "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                      "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "Volo.Abp.Application.Dtos.PagedResultDto<SM.Aurora.BikeTypes.BikeTypeDto>",
+                    "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<SM.Aurora.BikeTypes.BikeTypeDto>"
+                  }
+                },
+                {
+                  "name": "CreateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "input",
+                      "typeAsString": "SM.Aurora.BikeTypes.BikeTypeDto, SM.Aurora.Application.Contracts",
+                      "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                      "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                    "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto"
+                  }
+                },
+                {
+                  "name": "UpdateAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "input",
+                      "typeAsString": "SM.Aurora.BikeTypes.BikeTypeDto, SM.Aurora.Application.Contracts",
+                      "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                      "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                    "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto"
+                  }
+                },
+                {
+                  "name": "DeleteAsync",
+                  "parametersOnMethod": [
+                    {
+                      "name": "id",
+                      "typeAsString": "System.Guid, System.Private.CoreLib",
+                      "type": "System.Guid",
+                      "typeSimple": "string",
+                      "isOptional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returnValue": {
+                    "type": "System.Void",
+                    "typeSimple": "System.Void"
+                  }
+                }
+              ]
+            }
+          ],
+          "actions": {
+            "GetBikeTypeLookup": {
+              "uniqueName": "GetBikeTypeLookup",
+              "name": "GetBikeTypeLookup",
+              "httpMethod": "GET",
+              "url": "api/app/bike-type/bike-type-lookup",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.IEnumerable<SM.Aurora.Lookups.LookupDto>",
+                "typeSimple": "[SM.Aurora.Lookups.LookupDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "SM.Aurora.BikeTypes.BikeTypeAppService"
+            },
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/app/bike-type",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "SM.Aurora.BikeTypes.BikeTypeDto, SM.Aurora.Application.Contracts",
+                  "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                  "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                  "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<SM.Aurora.BikeTypes.BikeTypeDto,SM.Aurora.BikeTypes.BikeTypeDto>"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/app/bike-type/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "SM.Aurora.BikeTypes.BikeTypeDto, SM.Aurora.Application.Contracts",
+                  "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                  "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                  "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<SM.Aurora.BikeTypes.BikeTypeDto,System.Guid,SM.Aurora.BikeTypes.BikeTypeDto>"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/app/bike-type/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
+            },
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/bike-type/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+                "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.BikeTypes.BikeTypeDto,SM.Aurora.BikeTypes.BikeTypeDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
+            },
+            "GetListAsyncByInput": {
+              "uniqueName": "GetListAsyncByInput",
+              "name": "GetListAsync",
+              "httpMethod": "GET",
+              "url": "api/app/bike-type",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto, Volo.Abp.Ddd.Application.Contracts",
+                  "type": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "typeSimple": "Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "Sorting",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "SkipCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "MaxResultCount",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "input"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<SM.Aurora.BikeTypes.BikeTypeDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<SM.Aurora.BikeTypes.BikeTypeDto>"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.BikeTypes.BikeTypeDto,SM.Aurora.BikeTypes.BikeTypeDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
+            }
+          }
+        },
         "SM.Aurora.Bikes.BikeAppService": {
           "controllerName": "Bike",
           "controllerGroupName": "Bike",
@@ -2270,8 +2662,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "SM.Aurora.Bikes.BikeDto",
-                    "typeSimple": "SM.Aurora.Bikes.BikeDto"
+                    "type": "SM.Aurora.Bikes.BikeDetailsDto",
+                    "typeSimple": "SM.Aurora.Bikes.BikeDetailsDto"
                   }
                 },
                 {
@@ -2304,8 +2696,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "SM.Aurora.Bikes.BikeDto",
-                    "typeSimple": "SM.Aurora.Bikes.BikeDto"
+                    "type": "SM.Aurora.Bikes.BikeDetailsDto",
+                    "typeSimple": "SM.Aurora.Bikes.BikeDetailsDto"
                   }
                 },
                 {
@@ -2329,8 +2721,8 @@
                     }
                   ],
                   "returnValue": {
-                    "type": "SM.Aurora.Bikes.BikeDto",
-                    "typeSimple": "SM.Aurora.Bikes.BikeDto"
+                    "type": "SM.Aurora.Bikes.BikeDetailsDto",
+                    "typeSimple": "SM.Aurora.Bikes.BikeDetailsDto"
                   }
                 },
                 {
@@ -2354,6 +2746,43 @@
             }
           ],
           "actions": {
+            "GetAsyncById": {
+              "uniqueName": "GetAsyncById",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/bike/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "SM.Aurora.Bikes.BikeDetailsDto",
+                "typeSimple": "SM.Aurora.Bikes.BikeDetailsDto"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.Bikes.BikeDetailsDto,SM.Aurora.Bikes.BikeDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
+            },
             "GetBikeLookup": {
               "uniqueName": "GetBikeLookup",
               "name": "GetBikeLookup",
@@ -2365,6 +2794,43 @@
               "returnValue": {
                 "type": "System.Collections.Generic.IEnumerable<SM.Aurora.Lookups.LookupDto>",
                 "typeSimple": "[SM.Aurora.Lookups.LookupDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "SM.Aurora.Bikes.BikeAppService"
+            },
+            "GetListByOrderAsyncByOrderId": {
+              "uniqueName": "GetListByOrderAsyncByOrderId",
+              "name": "GetListByOrderAsync",
+              "httpMethod": "GET",
+              "url": "api/app/bike/by-order/{orderId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "orderId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "orderId",
+                  "name": "orderId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<SM.Aurora.Bikes.BikeDto>",
+                "typeSimple": "[SM.Aurora.Bikes.BikeDto]"
               },
               "allowAnonymous": null,
               "implementFrom": "SM.Aurora.Bikes.BikeAppService"
@@ -2400,11 +2866,11 @@
                 }
               ],
               "returnValue": {
-                "type": "SM.Aurora.Bikes.BikeDto",
-                "typeSimple": "SM.Aurora.Bikes.BikeDto"
+                "type": "SM.Aurora.Bikes.BikeDetailsDto",
+                "typeSimple": "SM.Aurora.Bikes.BikeDetailsDto"
               },
               "allowAnonymous": null,
-              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<SM.Aurora.Bikes.BikeDto,SM.Aurora.Bikes.CreateUpdateBikeDto>"
+              "implementFrom": "Volo.Abp.Application.Services.ICreateAppService<SM.Aurora.Bikes.BikeDetailsDto,SM.Aurora.Bikes.CreateUpdateBikeDto>"
             },
             "UpdateAsyncByIdAndInput": {
               "uniqueName": "UpdateAsyncByIdAndInput",
@@ -2457,11 +2923,11 @@
                 }
               ],
               "returnValue": {
-                "type": "SM.Aurora.Bikes.BikeDto",
-                "typeSimple": "SM.Aurora.Bikes.BikeDto"
+                "type": "SM.Aurora.Bikes.BikeDetailsDto",
+                "typeSimple": "SM.Aurora.Bikes.BikeDetailsDto"
               },
               "allowAnonymous": null,
-              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<SM.Aurora.Bikes.BikeDto,System.Guid,SM.Aurora.Bikes.CreateUpdateBikeDto>"
+              "implementFrom": "Volo.Abp.Application.Services.IUpdateAppService<SM.Aurora.Bikes.BikeDetailsDto,System.Guid,SM.Aurora.Bikes.CreateUpdateBikeDto>"
             },
             "DeleteAsyncById": {
               "uniqueName": "DeleteAsyncById",
@@ -2499,43 +2965,6 @@
               },
               "allowAnonymous": null,
               "implementFrom": "Volo.Abp.Application.Services.IDeleteAppService<System.Guid>"
-            },
-            "GetAsyncById": {
-              "uniqueName": "GetAsyncById",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/app/bike/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "SM.Aurora.Bikes.BikeDto",
-                "typeSimple": "SM.Aurora.Bikes.BikeDto"
-              },
-              "allowAnonymous": null,
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.Bikes.BikeDto,SM.Aurora.Bikes.BikeDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             },
             "GetListAsyncByInput": {
               "uniqueName": "GetListAsyncByInput",
@@ -2596,7 +3025,7 @@
                 "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<SM.Aurora.Bikes.BikeDto>"
               },
               "allowAnonymous": null,
-              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.Bikes.BikeDto,SM.Aurora.Bikes.BikeDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
+              "implementFrom": "Volo.Abp.Application.Services.IReadOnlyAppService<SM.Aurora.Bikes.BikeDetailsDto,SM.Aurora.Bikes.BikeDto,System.Guid,Volo.Abp.Application.Dtos.PagedAndSortedResultRequestDto>"
             }
           }
         }
@@ -9800,7 +10229,7 @@
       ]
     },
     "SM.Aurora.Orders.CreateUpdateOrderDto": {
-      "baseType": null,
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
       "isEnum": false,
       "enumNames": null,
       "enumValues": null,
@@ -9845,9 +10274,9 @@
         {
           "name": "CustomerId",
           "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": true,
           "minLength": null,
           "maxLength": null,
           "minimum": null,
@@ -9857,8 +10286,8 @@
         {
           "name": "BikeIds",
           "jsonName": null,
-          "type": "[System.Int32]",
-          "typeSimple": "[number]",
+          "type": "[System.Guid]",
+          "typeSimple": "[string]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -9867,6 +10296,37 @@
           "regex": null
         }
       ]
+    },
+    "Volo.Abp.Application.Dtos.EntityDto<T0>": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": [
+        "TKey"
+      ],
+      "properties": [
+        {
+          "name": "Id",
+          "jsonName": null,
+          "type": "TKey",
+          "typeSimple": "TKey",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Volo.Abp.Application.Dtos.EntityDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": []
     },
     "SM.Aurora.Orders.OrderStatus": {
       "baseType": "System.Enum",
@@ -9888,25 +10348,13 @@
       "genericArguments": null,
       "properties": null
     },
-    "SM.Aurora.Orders.OrderDto": {
-      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Guid>",
+    "SM.Aurora.Orders.OrderDetailsDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
       "isEnum": false,
       "enumNames": null,
       "enumValues": null,
       "genericArguments": null,
       "properties": [
-        {
-          "name": "OrderId",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
         {
           "name": "OrderDate",
           "jsonName": null,
@@ -9933,6 +10381,111 @@
         },
         {
           "name": "ShippingAddress",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CustomerId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Customer",
+          "jsonName": null,
+          "type": "SM.Aurora.Customers.CustomerDto",
+          "typeSimple": "SM.Aurora.Customers.CustomerDto",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Bikes",
+          "jsonName": null,
+          "type": "[SM.Aurora.Bikes.BikeDto]",
+          "typeSimple": "[SM.Aurora.Bikes.BikeDto]",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "SM.Aurora.Customers.CustomerDto": {
+      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FullName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Age",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Gender",
+          "jsonName": null,
+          "type": "SM.Aurora.Shared.Gender",
+          "typeSimple": "SM.Aurora.Shared.Gender",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Country",
+          "jsonName": null,
+          "type": "SM.Aurora.Shared.Country",
+          "typeSimple": "SM.Aurora.Shared.Country",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Email",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -10056,163 +10609,6 @@
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        }
-      ]
-    },
-    "Volo.Abp.Application.Dtos.EntityDto<T0>": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": [
-        "TKey"
-      ],
-      "properties": [
-        {
-          "name": "Id",
-          "jsonName": null,
-          "type": "TKey",
-          "typeSimple": "TKey",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        }
-      ]
-    },
-    "Volo.Abp.Application.Dtos.EntityDto": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": []
-    },
-    "SM.Aurora.Lookups.LookupDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "Name",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        }
-      ]
-    },
-    "SM.Aurora.Customers.CreateUpdateCustomerDto": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "FirstName",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": true,
-          "minLength": 0,
-          "maxLength": 50,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "LastName",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": true,
-          "minLength": 0,
-          "maxLength": 50,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "DateOfBirth",
-          "jsonName": null,
-          "type": "System.DateTime",
-          "typeSimple": "string",
-          "isRequired": true,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Gender",
-          "jsonName": null,
-          "type": "SM.Aurora.Shared.Gender",
-          "typeSimple": "SM.Aurora.Shared.Gender",
-          "isRequired": true,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Email",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": true,
-          "minLength": 0,
-          "maxLength": 256,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "PhoneNumber",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": true,
-          "minLength": 0,
-          "maxLength": 20,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Country",
-          "jsonName": null,
-          "type": "SM.Aurora.Shared.Country",
-          "typeSimple": "SM.Aurora.Shared.Country",
-          "isRequired": true,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Address",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": true,
-          "minLength": 0,
-          "maxLength": 256,
           "minimum": null,
           "maximum": null,
           "regex": null
@@ -10633,6 +11029,327 @@
       "genericArguments": null,
       "properties": null
     },
+    "SM.Aurora.Bikes.BikeDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Brand",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Model",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Color",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ReleaseYear",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Price",
+          "jsonName": null,
+          "type": "System.Double",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "BikeTypeId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "BikeType",
+          "jsonName": null,
+          "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+          "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "SM.Aurora.BikeTypes.BikeTypeDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Name",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "SM.Aurora.Orders.OrderDto": {
+      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "OrderDate",
+          "jsonName": null,
+          "type": "System.DateTime",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "OrderStatus",
+          "jsonName": null,
+          "type": "SM.Aurora.Orders.OrderStatus",
+          "typeSimple": "SM.Aurora.Orders.OrderStatus",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ShippingAddress",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CustomerId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Customer",
+          "jsonName": null,
+          "type": "SM.Aurora.Customers.CustomerDto",
+          "typeSimple": "SM.Aurora.Customers.CustomerDto",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "BikeIds",
+          "jsonName": null,
+          "type": "[System.Guid]",
+          "typeSimple": "[string]",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "SM.Aurora.Lookups.LookupDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Name",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "SM.Aurora.Customers.CreateUpdateCustomerDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FirstName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": 0,
+          "maxLength": 50,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "LastName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": 0,
+          "maxLength": 50,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "DateOfBirth",
+          "jsonName": null,
+          "type": "System.DateTimeOffset",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Gender",
+          "jsonName": null,
+          "type": "SM.Aurora.Shared.Gender",
+          "typeSimple": "SM.Aurora.Shared.Gender",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Email",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": 0,
+          "maxLength": 256,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "PhoneNumber",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": 0,
+          "maxLength": 20,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Country",
+          "jsonName": null,
+          "type": "SM.Aurora.Shared.Country",
+          "typeSimple": "SM.Aurora.Shared.Country",
+          "isRequired": true,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Address",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": true,
+          "minLength": 0,
+          "maxLength": 256,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
     "SM.Aurora.Customers.CustomerDetailsDto": {
       "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Guid>",
       "isEnum": false,
@@ -10679,7 +11396,7 @@
         {
           "name": "DateOfBirth",
           "jsonName": null,
-          "type": "System.DateTime",
+          "type": "System.DateTimeOffset",
           "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
@@ -10762,15 +11479,15 @@
         }
       ]
     },
-    "SM.Aurora.Customers.CustomerDto": {
-      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Guid>",
+    "SM.Aurora.Bikes.BikeDetailsDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
       "isEnum": false,
       "enumNames": null,
       "enumValues": null,
       "genericArguments": null,
       "properties": [
         {
-          "name": "FullName",
+          "name": "Brand",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -10782,7 +11499,31 @@
           "regex": null
         },
         {
-          "name": "Age",
+          "name": "Model",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Color",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ReleaseYear",
           "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
@@ -10794,10 +11535,10 @@
           "regex": null
         },
         {
-          "name": "Gender",
+          "name": "Price",
           "jsonName": null,
-          "type": "SM.Aurora.Shared.Gender",
-          "typeSimple": "SM.Aurora.Shared.Gender",
+          "type": "System.Double",
+          "typeSimple": "number",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -10806,22 +11547,22 @@
           "regex": null
         },
         {
-          "name": "Country",
+          "name": "BikeTypeId",
           "jsonName": null,
-          "type": "SM.Aurora.Shared.Country",
-          "typeSimple": "SM.Aurora.Shared.Country",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Email",
-          "jsonName": null,
-          "type": "System.String",
+          "type": "System.Guid",
           "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "BikeType",
+          "jsonName": null,
+          "type": "SM.Aurora.BikeTypes.BikeTypeDto",
+          "typeSimple": "SM.Aurora.BikeTypes.BikeTypeDto",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -10863,18 +11604,6 @@
           "regex": null
         },
         {
-          "name": "Type",
-          "jsonName": null,
-          "type": "SM.Aurora.Bikes.BikeType",
-          "typeSimple": "SM.Aurora.Bikes.BikeType",
-          "isRequired": true,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
           "name": "Color",
           "jsonName": null,
           "type": "System.String",
@@ -10909,100 +11638,13 @@
           "minimum": null,
           "maximum": null,
           "regex": null
-        }
-      ]
-    },
-    "SM.Aurora.Bikes.BikeType": {
-      "baseType": "System.Enum",
-      "isEnum": true,
-      "enumNames": [
-        "MountainBike",
-        "RoadBike",
-        "HybridBike",
-        "EBike"
-      ],
-      "enumValues": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "genericArguments": null,
-      "properties": null
-    },
-    "SM.Aurora.Bikes.BikeDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
+        },
         {
-          "name": "Brand",
+          "name": "BikeTypeId",
           "jsonName": null,
-          "type": "System.String",
+          "type": "System.Guid",
           "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Model",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Type",
-          "jsonName": null,
-          "type": "SM.Aurora.Bikes.BikeType",
-          "typeSimple": "SM.Aurora.Bikes.BikeType",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Color",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "ReleaseYear",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
-          "name": "Price",
-          "jsonName": null,
-          "type": "System.Double",
-          "typeSimple": "number",
-          "isRequired": false,
+          "isRequired": true,
           "minLength": null,
           "maxLength": null,
           "minimum": null,

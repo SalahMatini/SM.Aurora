@@ -29,6 +29,9 @@ namespace SM.Aurora.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("BikeTypeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Brand")
                         .IsRequired()
                         .HasMaxLength(128)
@@ -78,12 +81,26 @@ namespace SM.Aurora.Migrations
                     b.Property<int>("ReleaseYear")
                         .HasColumnType("int");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
+
+                    b.HasIndex("BikeTypeId");
+
+                    b.ToTable("AppBikes", (string)null);
+                });
+
+            modelBuilder.Entity("SM.Aurora.Biketypes.BikeType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppBikes", (string)null);
+                    b.ToTable("AppBikeType", (string)null);
                 });
 
             modelBuilder.Entity("SM.Aurora.Customers.Customer", b =>
@@ -114,8 +131,8 @@ namespace SM.Aurora.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("DateOfBirth")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<Guid?>("DeleterId")
                         .HasColumnType("uniqueidentifier")
@@ -174,22 +191,17 @@ namespace SM.Aurora.Migrations
 
             modelBuilder.Entity("SM.Aurora.OrderBikes.OrderBike", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BikeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
+                    b.HasKey("OrderId", "BikeId");
 
                     b.HasIndex("BikeId");
 
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderBike");
+                    b.ToTable("AppOrderBikes", (string)null);
                 });
 
             modelBuilder.Entity("SM.Aurora.Orders.Order", b =>
@@ -244,9 +256,6 @@ namespace SM.Aurora.Migrations
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
 
                     b.Property<int>("OrderStatus")
                         .HasColumnType("int");
@@ -2001,6 +2010,17 @@ namespace SM.Aurora.Migrations
                     b.ToTable("AbpTenantConnectionStrings", (string)null);
                 });
 
+            modelBuilder.Entity("SM.Aurora.Bikes.Bike", b =>
+                {
+                    b.HasOne("SM.Aurora.Biketypes.BikeType", "BikeType")
+                        .WithMany("Bike")
+                        .HasForeignKey("BikeTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BikeType");
+                });
+
             modelBuilder.Entity("SM.Aurora.OrderBikes.OrderBike", b =>
                 {
                     b.HasOne("SM.Aurora.Bikes.Bike", "Bike")
@@ -2176,6 +2196,11 @@ namespace SM.Aurora.Migrations
             modelBuilder.Entity("SM.Aurora.Bikes.Bike", b =>
                 {
                     b.Navigation("OrderBikes");
+                });
+
+            modelBuilder.Entity("SM.Aurora.Biketypes.BikeType", b =>
+                {
+                    b.Navigation("Bike");
                 });
 
             modelBuilder.Entity("SM.Aurora.Orders.Order", b =>

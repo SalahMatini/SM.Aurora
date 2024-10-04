@@ -13,8 +13,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace SM.Aurora.Migrations
 {
     [DbContext(typeof(AuroraDbContext))]
-    [Migration("20240622005110_fix")]
-    partial class fix
+    [Migration("20240623221102_order_removed_orderID")]
+    partial class order_removed_orderID
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,8 +117,8 @@ namespace SM.Aurora.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("CreatorId");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("DateOfBirth")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<Guid?>("DeleterId")
                         .HasColumnType("uniqueidentifier")
@@ -177,22 +177,17 @@ namespace SM.Aurora.Migrations
 
             modelBuilder.Entity("SM.Aurora.OrderBikes.OrderBike", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BikeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
+                    b.HasKey("OrderId", "BikeId");
 
                     b.HasIndex("BikeId");
 
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderBike");
+                    b.ToTable("AppOrderBikes", (string)null);
                 });
 
             modelBuilder.Entity("SM.Aurora.Orders.Order", b =>
@@ -247,9 +242,6 @@ namespace SM.Aurora.Migrations
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
 
                     b.Property<int>("OrderStatus")
                         .HasColumnType("int");

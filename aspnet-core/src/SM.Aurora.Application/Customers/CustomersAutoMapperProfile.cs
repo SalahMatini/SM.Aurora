@@ -2,9 +2,9 @@
 
 namespace SM.Aurora.Customers
 {
-    public class CustomersAutoMapperProfile : Profile
+    public class BikeTypeAutoMapperProfile : Profile
     {
-        public CustomersAutoMapperProfile()
+        public BikeTypeAutoMapperProfile()
         {
             CreateMap<Customer, CustomerDto>();
             CreateMap<Customer, CustomerDetailsDto>();

@@ -1,4 +1,4 @@
-import type { BikeDto, CreateUpdateBikeDto } from './models';
+import type { BikeDetailsDto, BikeDto, CreateUpdateBikeDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -12,7 +12,7 @@ export class BikeService {
   
 
   create = (input: CreateUpdateBikeDto, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, BikeDto>({
+    this.restService.request<any, BikeDetailsDto>({
       method: 'POST',
       url: '/api/app/bike',
       body: input,
@@ -29,7 +29,7 @@ export class BikeService {
   
 
   get = (id: string, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, BikeDto>({
+    this.restService.request<any, BikeDetailsDto>({
       method: 'GET',
       url: `/api/app/bike/${id}`,
     },
@@ -53,8 +53,16 @@ export class BikeService {
     { apiName: this.apiName,...config });
   
 
+  getListByOrder = (orderId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, BikeDto[]>({
+      method: 'GET',
+      url: `/api/app/bike/by-order/${orderId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   update = (id: string, input: CreateUpdateBikeDto, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, BikeDto>({
+    this.restService.request<any, BikeDetailsDto>({
       method: 'PUT',
       url: `/api/app/bike/${id}`,
       body: input,

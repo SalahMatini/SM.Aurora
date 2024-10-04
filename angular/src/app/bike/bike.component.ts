@@ -2,7 +2,7 @@ import { ListService, PagedResultDto } from '@abp/ng.core';
 import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BikeService, BikeDto, bikeTypeOptions } from '@proxy/bikes';
+import { BikeService, BikeDto, } from '@proxy/bikes';
 
 @Component({
   selector: 'app-bike',

@@ -4,8 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BikeService } from '@proxy/bikes';
 import { CustomerService } from '@proxy/customers';
 import { LookupDto } from '@proxy/lookups';
-import { OrderDto, OrderService, orderStatusOptions } from '@proxy/orders';
-import { filter, switchMap, tap } from 'rxjs';
+import { OrderDetailsDto, OrderDto, OrderService, orderStatusOptions } from '@proxy/orders';
 
 @Component({
   selector: 'app-edit-order',
@@ -13,10 +12,10 @@ import { filter, switchMap, tap } from 'rxjs';
 })
 export class EditOrderComponent implements OnInit {
 
-  id: string;
+  orderId: string;
+  order: OrderDetailsDto;
   form: FormGroup;
   orderStatuses = orderStatusOptions;
-
 
   customerLookup: LookupDto[];
   bikeLookup: LookupDto[] = [];
@@ -31,62 +30,88 @@ export class EditOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadOrder();
+    this.setOrderId();
+    this.buildForm();
     this.loadLookups();
+    this.loadOrder();
   }
 
-
-  save(): void {                  //void??//
+  save(): void {
 
     if (this.form.invalid)
       return;
 
-    this.customerService.update(this.id, this.form.value).subscribe(() => {
+    this.orderService.update(this.orderId, this.form.value).subscribe(() => {
       this.router.navigate(['/orders']);
     });
   }
 
   //#region Private Functions
 
-  private buildForm(order: OrderDto) {
+  private buildForm(): void {
     this.form = this.fb.group({
-      customerId: [, Validators.required],
-      orderStatus: [order.orderStatus, Validators.required],
-      shippingAddress: [order.shippingAddress, Validators.required],
+      id: [0],
+      customerId: ['', Validators.required],
+      bikeIds: [[], Validators.required],
+      orderStatus: [null, Validators.required],
+      shippingAddress: ["", Validators.required],
     });
-    console.log('Form built successfully.');
   }
 
-  loadOrder() {
-    this.activatedRoute.params
-      .pipe(
-        filter(params => params.id),
-        tap(({ id }) => (this.id = id)),
-        switchMap(({ id }) => this.orderService.get(id)),
-        tap(order => this.buildForm(order))
-      ).
-      subscribe();
+  private setOrderId(): void {
+
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
+
+      this.orderId = this.activatedRoute.snapshot.paramMap.get('id');
+    }
+  }
+
+  private loadOrder() {
+    this.orderService.get(this.orderId).subscribe({
+      next: (orderDetailsFromApi: OrderDetailsDto) => {
+
+        this.order = orderDetailsFromApi;
+        this.patchOrderDetails(orderDetailsFromApi)
+      }
+    });
   }
 
   private loadLookups(): void {
+
     this.loadCustomerLookup();
     this.loadBikelookup();
   }
 
-  private loadCustomerLookup() {
+  private loadCustomerLookup(): void {
+
     this.customerService.getCustomerLookup().subscribe({
+
       next: (customerLookupFromApi: LookupDto[]) => {
         this.customerLookup = customerLookupFromApi;
       }
     })
   }
 
-  private loadBikelookup() {
+  private loadBikelookup(): void {
+
     this.bikeService.getBikeLookup().subscribe({
       next: (bikeLookupFromApi: LookupDto[]) => {
+
         this.bikeLookup = bikeLookupFromApi;
       }
     })
+  }
+
+  private patchOrderDetails(orderDetails: OrderDetailsDto): void {
+
+    this.form.patchValue({
+      id: this.order.id,
+      customerId: this.order.customerId,
+      bikeIds: this.order.bikes.map(({ id }) => id),
+      orderStatus: this.order.orderStatus,
+      shippingAddress: this.order.shippingAddress
+    });
+
   }
 
   //#endregion

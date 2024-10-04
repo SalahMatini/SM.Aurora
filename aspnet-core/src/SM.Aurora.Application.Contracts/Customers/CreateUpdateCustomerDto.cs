@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SM.Aurora.Shared;
+using System;
 using System.ComponentModel.DataAnnotations;
-using SM.Aurora.Shared;
+using Volo.Abp.Application.Dtos;
 
 namespace SM.Aurora.Customers
 {
-    public class CreateUpdateCustomerDto
+    public class CreateUpdateCustomerDto : EntityDto<Guid>
     {
         [Required]
         [StringLength(50)]
@@ -15,7 +16,7 @@ namespace SM.Aurora.Customers
         public string LastName { get; set; }
 
         [Required]
-        public DateTime DateOfBirth { get; set; }
+        public DateTimeOffset DateOfBirth { get; set; }
 
         [Required]
         public Gender Gender { get; set; }

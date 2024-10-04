@@ -5,7 +5,7 @@
             <div class="mt-2">
                 <mat-form-field class="w-100 mt-2" appearance="outline">
                     <mat-label>Customer</mat-label>
-                    <mat-select>
+                    <mat-select formControlName="customerId">
                         @for (customer of customerLookup; track customer) {
                         <mat-option [value]="customer.id">{{customer.name}}</mat-option>
                         }
@@ -17,7 +17,7 @@
             <div class="mt-2">
                 <mat-form-field class="w-100 mt-2" appearance="outline">
                     <mat-label>Order Status</mat-label>
-                    <mat-select>
+                    <mat-select formControlName="orderStatus">
                         @for (orderStatus of orderStatuses; track orderStatus) {
                         <mat-option [value]="orderStatus.value">{{ '::Enum:OrderStatus.' + orderStatus.value |
                             abpLocalization
@@ -30,7 +30,7 @@
 
             <mat-form-field class="w-100 mt-2" appearance="outline">
                 <mat-label>Bike</mat-label>
-                <mat-select>
+                <mat-select formControlName="bikeIds" multiple>
                     @for (bike of bikeLookup; track bike) {
                     <mat-option [value]="bike.id">{{bike.name}}</mat-option>
                     }

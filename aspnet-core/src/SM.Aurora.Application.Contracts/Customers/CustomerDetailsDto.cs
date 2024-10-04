@@ -1,5 +1,5 @@
-﻿using System;
-using SM.Aurora.Shared;
+﻿using SM.Aurora.Shared;
+using System;
 using Volo.Abp.Application.Dtos;
 
 namespace SM.Aurora.Customers
@@ -12,7 +12,7 @@ namespace SM.Aurora.Customers
 
         public string LastName { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTimeOffset DateOfBirth { get; set; }
 
         public int Age { get; set; }
 

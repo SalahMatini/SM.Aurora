@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BikeDto, BikeService, bikeTypeOptions } from '@proxy/bikes';
+import { BikeTypeService } from '@proxy/bike-types';
+import { BikeDto, BikeService } from '@proxy/bikes';
+import { LookupDto } from '@proxy/lookups';
 import { filter, switchMap, tap } from 'rxjs';
 
 @Component({
@@ -12,17 +14,19 @@ export class EditBikeComponent implements OnInit {
 
   id: string;
   form: FormGroup;
-  bikeTypes = bikeTypeOptions;
+  bikeTypeLookup: LookupDto[];
 
   constructor(
     private bikeService: BikeService,
     private router: Router,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
+    private bikeTypeSvc: BikeTypeService,
   ) { }
 
   ngOnInit() {
     this.loadBike();
+    this.loadBikeTypeLookup();
   }
 
 
@@ -42,7 +46,7 @@ export class EditBikeComponent implements OnInit {
     this.form = this.fb.group({
       brand: [bike.brand, Validators.required],
       model: [bike.model, Validators.required],
-      type: [bike.type, Validators.required],
+      bikeTypeId: [bike.bikeTypeId, Validators.required],
       color: [bike.color, Validators.required],
       releaseYear: [bike.releaseYear, Validators.required],
       price: [bike.price, Validators.required],
@@ -59,6 +63,14 @@ export class EditBikeComponent implements OnInit {
         tap(bike => this.buildForm(bike))
       ).
       subscribe();
+  }
+
+  private loadBikeTypeLookup() {
+    this.bikeTypeSvc.getBikeTypeLookup().subscribe({
+      next: (bikeTypeLookupFromApi: LookupDto[]) => {
+        this.bikeTypeLookup = bikeTypeLookupFromApi;
+      }
+    })
   }
 
   //#region

@@ -64,8 +64,8 @@ export class EditCustomerComponent implements OnInit {
         tap(customer => this.buildForm(customer))
       ).
       subscribe();
-
-    //#region
   }
+
+  //#endregion
 
 }

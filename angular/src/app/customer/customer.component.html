@@ -29,6 +29,9 @@
                             <i class="fa fa-cog me-1"></i>{{ '::Actions' | abpLocalization }}
                         </button>
                         <div ngbDropdownMenu>
+                            <button ngbDropdownItem [routerLink]="['details', row.id]">
+                                {{ '::Details' | abpLocalization }}
+                            </button>
                             <button *abpPermission="'BikeShop.Customers.Edit'" ngbDropdownItem
                                 [routerLink]="['edit', row.id]">
                                 {{ '::Edit' | abpLocalization }}

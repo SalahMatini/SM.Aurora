@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Volo.Abp.Application.Dtos;
 
 namespace SM.Aurora.Orders
 {
-    public class CreateUpdateOrderDto
+    public class CreateUpdateOrderDto : EntityDto<Guid>
     {
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
@@ -15,9 +16,11 @@ namespace SM.Aurora.Orders
         [StringLength(256)]
         public string ShippingAddress { get; set; }
 
-        public int CustomerId { get; set; }
+        [Required]
 
-        public List<int> BikeIds { get; set; } = [];
+        public Guid CustomerId { get; set; }
+
+        public List<Guid> BikeIds { get; set; } = [];
 
     }
 }

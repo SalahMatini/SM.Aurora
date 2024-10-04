@@ -14,10 +14,9 @@
             <div class="mt-2">
                 <mat-form-field>
                     <mat-label>Bike Type</mat-label>
-                    <mat-select>
-                        @for (bikeType of bikeTypes; track bikeType) {
-                        <mat-option [value]="bikeType.value">{{ '::Enum:BikeType.' + bikeType.value | abpLocalization
-                            }}</mat-option>
+                    <mat-select formControlName="bikeTypeId">
+                        @for (bikeType of bikeTypeLookup; track bikeType) {
+                        <mat-option [value]="bikeType.id">{{bikeType.name}}</mat-option>
                         }
                     </mat-select>
                 </mat-form-field>
@@ -40,7 +39,7 @@
             </div>
 
             <div class="pt-2">
-                <button type="button" class="btn btn-secondary m-1" [routerLink]="['/books']">
+                <button type="button" class="btn btn-secondary m-1" [routerLink]="['/bikes']">
                     {{ '::Cancel' | abpLocalization }}
                 </button>
 

@@ -47,7 +47,7 @@
             <div class="mt-3">
                 <mat-form-field>
                     <mat-label>Country</mat-label>
-                    <mat-select formControlName="gender">
+                    <mat-select formControlName="country">
                         @for (country of countries; track country) {
                         <mat-option
                             [value]="country.value">{{'::Enum:Country.'+country.value|abpLocalization}}</mat-option>

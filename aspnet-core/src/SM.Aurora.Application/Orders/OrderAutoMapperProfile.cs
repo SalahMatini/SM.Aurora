@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Linq;
 
 namespace SM.Aurora.Orders
 {
@@ -7,7 +8,12 @@ namespace SM.Aurora.Orders
         public OrderAutoMapperProfile()
         {
             CreateMap<Order, OrderDto>();
+
             CreateMap<CreateUpdateOrderDto, Order>();
+
+            CreateMap<Order, OrderDetailsDto>()
+                .ForMember(orderDetailsDto => orderDetailsDto.Bikes,
+                            opts => opts.MapFrom(order => order.OrderBikes.Select(ob => ob.Bike)));
         }
     }
 }

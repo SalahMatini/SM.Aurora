@@ -1,4 +1,5 @@
-﻿using SM.Aurora.OrderBikes;
+﻿using SM.Aurora.Biketypes;
+using SM.Aurora.OrderBikes;
 using System;
 using System.Collections.Generic;
 using Volo.Abp.Domain.Entities.Auditing;
@@ -9,7 +10,10 @@ namespace SM.Aurora.Bikes
     {
         public string Brand { get; set; }
         public string Model { get; set; }
-        public BikeType Type { get; set; }
+
+        public Guid BikeTypeId { get; set; }
+        public BikeType BikeType { get; set; }
+
         public string Color { get; set; }
         public int ReleaseYear { get; set; }
         public double Price { get; set; }

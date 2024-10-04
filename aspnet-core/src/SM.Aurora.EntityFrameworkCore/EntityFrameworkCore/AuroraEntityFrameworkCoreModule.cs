@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Uow;
+using SM.Aurora.Orders;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -38,16 +39,28 @@ public class AuroraEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<AuroraDbContext>(options =>
         {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
+            /* Remove "includeAllEntities: true" to create
+             * default repositories only for aggregate roots */
             options.AddDefaultRepositories(includeAllEntities: true);
         });
 
         Configure<AbpDbContextOptions>(options =>
         {
-                /* The main point to change your DBMS.
-                 * See also AuroraMigrationsDbContextFactory for EF Core tooling. */
+            /* The main point to change your DBMS.
+             * See also AuroraMigrationsDbContextFactory for EF Core tooling. */
             options.UseSqlServer();
+        });
+
+        Configure<AbpEntityOptions>(options =>
+        {
+            options.Entity<Order>(orderOptions =>
+            {
+                orderOptions.DefaultWithDetailsFunc = query =>
+                            query
+                            .Include(o => o.Customer)
+                            .Include(o => o.OrderBikes)
+                                .ThenInclude(ob => ob.Bike);
+            });
         });
 
     }

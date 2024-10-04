@@ -4,11 +4,13 @@ import { BikeComponent } from './bike.component';
 import { SharedModule } from '../shared/shared.module';
 import { CreateBikeComponent } from './create-bike/create-bike.component';
 import { EditBikeComponent } from './edit-bike/edit-bike.component';
+import { BikeDetailsComponent } from './bike-details/bike-details.component';
 
 @NgModule({
   declarations: [BikeComponent,
     CreateBikeComponent,
-    EditBikeComponent
+    EditBikeComponent,
+    BikeDetailsComponent
   ],
   imports: [SharedModule, BikeRoutingModule],
 })

@@ -6,9 +6,11 @@ namespace SM.Aurora.Orders
 {
     public interface IOrderAppService :
         ICrudAppService<
+        OrderDetailsDto,
         OrderDto,
         Guid,
         PagedAndSortedResultRequestDto,
+        CreateUpdateOrderDto,
         CreateUpdateOrderDto>
     {
     }

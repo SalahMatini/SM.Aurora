@@ -28,10 +28,11 @@ const routes: Routes = [
   { path: 'bikes', loadChildren: () => import('./bike/bike.module').then(m => m.BikeModule) },
   { path: 'customers', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) },
   { path: 'orders', loadChildren: () => import('./order/order.module').then(m => m.OrderModule) },
+  { path: 'bike-types', loadChildren: () => import('./bike-type/bike-type.module').then(m => m.BikeTypeModule) },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {})],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

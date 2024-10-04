@@ -1,8 +1,6 @@
 import { ListService, PagedResultDto } from '@abp/ng.core';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CustomerService, CustomerDto, CustomerDetailsDto } from '@proxy/customers';
-import { countryOptions, genderOptions } from '@proxy/shared';
+import { CustomerService, CustomerDto } from '@proxy/customers';
 import { NgbDateNativeAdapter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationService, Confirmation } from '@abp/ng.theme.shared';
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SM.Aurora.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -823,6 +823,30 @@ namespace SM.Aurora.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppOrderBikes",
+                columns: table => new
+                {
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BikeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppOrderBikes", x => new { x.OrderId, x.BikeId });
+                    table.ForeignKey(
+                        name: "FK_AppOrderBikes_AppBikes_BikeId",
+                        column: x => x.BikeId,
+                        principalTable: "AppBikes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppOrderBikes_AppOrders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "AppOrders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OpenIddictTokens",
                 columns: table => new
                 {
@@ -1062,6 +1086,11 @@ namespace SM.Aurora.Migrations
                 column: "UserName");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppOrderBikes_BikeId",
+                table: "AppOrderBikes",
+                column: "BikeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AppOrders_CustomerId",
                 table: "AppOrders",
                 column: "CustomerId");
@@ -1170,10 +1199,7 @@ namespace SM.Aurora.Migrations
                 name: "AbpUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AppBikes");
-
-            migrationBuilder.DropTable(
-                name: "AppOrders");
+                name: "AppOrderBikes");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictScopes");
@@ -1197,13 +1223,19 @@ namespace SM.Aurora.Migrations
                 name: "AbpUsers");
 
             migrationBuilder.DropTable(
-                name: "AppCustomers");
+                name: "AppBikes");
+
+            migrationBuilder.DropTable(
+                name: "AppOrders");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictAuthorizations");
 
             migrationBuilder.DropTable(
                 name: "AbpAuditLogs");
+
+            migrationBuilder.DropTable(
+                name: "AppCustomers");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictApplications");

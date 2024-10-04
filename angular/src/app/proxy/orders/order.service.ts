@@ -1,4 +1,4 @@
-import type { CreateUpdateOrderDto, OrderDto } from './models';
+import type { CreateUpdateOrderDto, OrderDetailsDto, OrderDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedAndSortedResultRequestDto, PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -11,7 +11,7 @@ export class OrderService {
   
 
   create = (createUpdateOrderDto: CreateUpdateOrderDto, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, OrderDto>({
+    this.restService.request<any, OrderDetailsDto>({
       method: 'POST',
       url: '/api/app/order',
       body: createUpdateOrderDto,
@@ -28,7 +28,7 @@ export class OrderService {
   
 
   get = (id: string, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, OrderDto>({
+    this.restService.request<any, OrderDetailsDto>({
       method: 'GET',
       url: `/api/app/order/${id}`,
     },
@@ -44,8 +44,16 @@ export class OrderService {
     { apiName: this.apiName,...config });
   
 
+  getListByCustomer = (customerId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, OrderDto[]>({
+      method: 'GET',
+      url: `/api/app/order/by-customer/${customerId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   update = (id: string, input: CreateUpdateOrderDto, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, OrderDto>({
+    this.restService.request<any, OrderDetailsDto>({
       method: 'PUT',
       url: `/api/app/order/${id}`,
       body: input,

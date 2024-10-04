@@ -1,14 +1,8 @@
 import { ListService, PagedResultDto } from '@abp/ng.core';
 import { Confirmation, ConfirmationService } from '@abp/ng.theme.shared';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { BikeService } from '@proxy/bikes';
-import { CustomerDto, CustomerService } from '@proxy/customers';
-import { LookupDto } from '@proxy/lookups';
 import { OrderService, OrderDto, orderStatusOptions } from '@proxy/orders';
-import { Observable, map } from 'rxjs';
 import { DeleteOrderDialogComponent } from './delete-order-dialog/delete-order-dialog.component';
 
 @Component({
@@ -24,11 +18,8 @@ export class OrderComponent implements OnInit {
 
   constructor(
     public readonly list: ListService,
-    private customerSvc: CustomerService,
     private orderSvc: OrderService,
-    private fb: FormBuilder,
     private confirmation: ConfirmationService,
-    private bikeSvc: BikeService,
     public dialog: MatDialog
   ) { }
 

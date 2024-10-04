@@ -10,6 +10,7 @@
     "Close": "Close",
     "Delete": "Delete",
     "Edit": "Edit",
+    "Details":  "Details",
     "CreationTime": "Creation time",
     "AreYouSure": "Are you sure?",
     "AreYouSureToDelete": "Are you sure you want to delete this item?",
@@ -19,19 +20,21 @@
     "NewBike": "New bike",
     "Brand": "Brand",
     "Model": "Model",
-    "Type": "Type",
+    "BikeType": "Bike Type",
     "Color": "Color",
     "ReleaseYear": "Release Year",
     "Price": "Price",
-    "Enum:BikeType.0": "Mountain Bike",
-    "Enum:BikeType.1": "Road Bike",
-    "Enum:BikeType.2": "Hybrid Bike",
-    "Enum:BikeType.3": "E-Bike",
     "Permission:BikeShop": "Bike Shop",
     "Permission:Bikes": "Bike Management",
     "Permission:Bikes.Create": "Creating new bikes",
     "Permission:Bikes.Edit": "Editing the bikes",
     "Permission:Bikes.Delete": "Deleting the bikes",
+
+    /**Bike Localization**/
+    "Menu:BikeTypes": "Bike Types",
+    "NewBikeType": "New Bike Type",
+    "Name": "Name",
+
 
     /**Customers Localization**/
     "Menu:Customers": "Customers",

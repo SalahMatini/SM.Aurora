@@ -1,8 +1,8 @@
+import type { EntityDto, FullAuditedEntityDto } from '@abp/ng.core';
 import type { Gender } from '../shared/gender.enum';
 import type { Country } from '../shared/country.enum';
-import type { FullAuditedEntityDto } from '@abp/ng.core';
 
-export interface CreateUpdateCustomerDto {
+export interface CreateUpdateCustomerDto extends EntityDto<string> {
   firstName: string;
   lastName: string;
   dateOfBirth: string;

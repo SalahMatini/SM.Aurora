@@ -5,13 +5,15 @@ import { SharedModule } from '../shared/shared.module';
 import { DeleteOrderDialogComponent } from './delete-order-dialog/delete-order-dialog.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { EditOrderComponent } from './edit-order/edit-order.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 @NgModule({
   declarations: [
     OrderComponent,
     CreateOrderComponent,
     EditOrderComponent,
-    DeleteOrderDialogComponent
+    DeleteOrderDialogComponent,
+    OrderDetailsComponent
   ],
   imports: [
     SharedModule,
